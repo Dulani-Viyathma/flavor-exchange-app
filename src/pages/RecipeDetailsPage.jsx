@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import recipes from '../data';
 
 function RecipeDetailsPage() {
@@ -18,6 +18,10 @@ function RecipeDetailsPage() {
       <p><strong>Rating:</strong> ⭐ {recipe.rating}</p>
       <p><strong>Ingredients:</strong> Coming soon...</p>
       <p><strong>Instructions:</strong> Coming soon...</p>
+
+      <Link to="/" style={{ display: 'inline-block', marginTop: '20px' }}>
+        ← Back to Home
+      </Link>
     </div>
   );
 }
