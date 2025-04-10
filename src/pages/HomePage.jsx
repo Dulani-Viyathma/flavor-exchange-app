@@ -1,10 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import recipes from '../data';
 
 function HomePage() {
+  const navigate = useNavigate();
+
+  // Get user from localStorage
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  // Redirect to login if not logged in
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+  // Return null until user is checked (to avoid rendering errors)
+  if (!user) {
+    return null; // or a loading spinner
+  }
+
   return (
     <div>
+      <h2>Welcome, {user.username}!</h2>
+
+      {/* Logout Button */}
+      <button onClick={handleLogout}>Logout</button>
+
       <h2>Home Page - Recipes</h2>
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         {recipes.map((recipe) => (
